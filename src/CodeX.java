@@ -7,12 +7,12 @@ import java.util.List;
 
 class CodeX {
     public static void main(String args[]) {
-        System.out.println("Welcome to Mathematics");
-        int a[] = {1, 1, 2, 2, 3, 3, 3, 3, 5, 145};
+        System.out.println("Running ...");
+        int a[] = {1, 1, 2, 2, 3, 3, 3, 3, 145};
         ArrayList<Integer> arr = new ArrayList<>();
         for (int i = 0; i < a.length; i++)
             arr.add(a[i]);
-        System.out.println(twoOddOccuring(arr));
+        oneOddOccuring(arr);
     }
 
     static int countDigit(int num) {
@@ -124,5 +124,11 @@ class CodeX {
         pair.add(num1);
         pair.add(num2);
         return pair;
+    }
+    static void oneOddOccuring(ArrayList<Integer> arr){
+        int res = 0;
+        for(int i : arr)
+            res^=i;
+        System.out.println(res);
     }
 }
