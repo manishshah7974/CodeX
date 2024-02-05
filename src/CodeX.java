@@ -6,11 +6,7 @@ import java.util.ArrayList;
 class CodeX {
     public static void main(String args[]){
         System.out.println("Welcome to Mathematics");
-        boolean result [] = sieveOfErasthosthenes(200);
-        for(int i=2;i<200;i++) {
-            if(result[i])
-                System.out.print(i+" ");
-        }
+        System.out.println(powerSet("abc"));
     }
     static int countDigit(int num){
         int count =0;
@@ -60,10 +56,11 @@ class CodeX {
     }
     static boolean[] sieveOfErasthosthenes(int n){
         boolean A[]=new boolean[n+1];
-        for(int i=0;i<n+1;i++)
+        int i;
+        for(i=0;i<n+1;i++)
             A[i]=true;
 
-        for(int i =2;i<=Math.sqrt(n);i++)
+        for(i =2;i<=Math.sqrt(n);i++)
         {
             if(A[i]==true)
             for(int j=i*2;j<n;j+=i)
@@ -71,4 +68,23 @@ class CodeX {
         }
         return A;
     }
-}
+    // Power Set Using Bitwise
+    static ArrayList<ArrayList<Character>> powerSet(String a){
+        ArrayList<ArrayList<Character>> res = new ArrayList<>();
+        int n = (int)Math.pow(2,a.length());
+        for(int i=0;i<n;i++)   //8
+        {
+            res.add(new ArrayList<Character>());
+            for(int j=0;j<a.length();j++)
+            {
+                if( ((i>>j) & 1 ) == 1){
+                    res.get(i).add(a.charAt(j));
+                }
+            }
+        }
+        return res;
+    }
+} //8421
+// 0
+// 1
+// 4
