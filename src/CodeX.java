@@ -3,16 +3,13 @@ import com.sun.org.apache.xpath.internal.operations.Bool;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 class CodeX {
     public static void main(String args[]) {
         System.out.println("Running ...");
-        int a[] = {1, 1, 2, 2, 3, 3, 3, 3, 145};
-        ArrayList<Integer> arr = new ArrayList<>();
-        for (int i = 0; i < a.length; i++)
-            arr.add(a[i]);
-        oneOddOccuring(arr);
+       System.out.println(frequencySort("aabbbbMMM"));
     }
 
     static int countDigit(int num) {
@@ -130,5 +127,47 @@ class CodeX {
         for(int i : arr)
             res^=i;
         System.out.println(res);
+    }
+    static String frequencySort(String s) {
+        String res="";
+        Pair data[] = new Pair[256];
+        for(int i =0;i<256;i++)
+            data[i]=new Pair();
+        for(int i=0;i<s.length(); i++){
+            data[s.charAt(i)].x=s.charAt(i);
+            (data[s.charAt(i)].y)++;
+        }
+        MySort.sort(data);
+        for(int i=0;i<256;i++){
+            if(data[i].x!=0){
+                for(int k=0;k<data[i].y;k++)
+                    res+=(char)data[i].x;
+            }
+        }
+        return res;
+    }
+    static class Pair{
+        int x;
+        int y;
+        Pair(){
+            x=0;
+            y=0;
+        }
+        Pair(int x,int y){
+            x=this.x;
+            y=this.y;
+        }
+    }
+    static class MySort{
+        static void sort(Pair arr[]){
+            Comparator<Pair> cmp = new Comparator<Pair>(){
+
+                @Override
+                public int compare(Pair p1,Pair p2){
+                    return -p1.y+p2.y;
+                }
+            };
+            Arrays.sort(arr,cmp);
+        }
     }
 }
